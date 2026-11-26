@@ -62,15 +62,15 @@ export default function App() {
         <a className="cta" href="#booking">Ride book karein <b>↓</b></a>
         <p className="assure">✓ Pehle fare confirm, phir booking pakki</p>
       </div>
-      <div className="hero-photo"><div className="hero-visual" aria-hidden="true"/><div className="photo-shade"/><div className="photo-caption"><span>SAFAR AAPKA</span><strong>Har raaste par,<br/>aapke saath.</strong><small>Local rides · Outstation journeys</small></div><div className="photo-stamp">RIDEYOU<br/><b>BIHAR</b></div></div>
+      <div className="hero-photo"><img className="hero-image" src="https://images.unsplash.com/photo-1663852397535-18292e115327?auto=format&fit=crop&w=1000&q=65" alt="Car travelling on a road" fetchPriority="high"/><div className="photo-shade"/><div className="photo-caption"><span>SAFAR AAPKA</span><strong>Har raaste par,<br/>aapke saath.</strong><small>Local rides · Outstation journeys</small></div><div className="photo-stamp">RIDEYOU<br/><b>BIHAR</b></div></div>
     </section>
 
     <section className="ride-types wrap">
       <div className="section-heading"><div><div className="eyebrow"><i/> PICK YOUR JOURNEY</div><h2>Har safar ke liye<br/><em>ek sahi ride.</em></h2></div><p>Chhoti doori ho ya lamba safar, apni zaroorat ke hisaab se booking request bhejein.</p></div>
       <div className="ride-type-grid">
-        <article className="type-card"><div><span>01 / CITY & TOWN</span><h3>Local rides</h3><p>Market, station, hospital ya daily travel.</p></div></article>
-        <article className="type-card"><div><span>02 / FAMILY TRAVEL</span><h3>Comfort rides</h3><p>Family aur group ke safar ke liye.</p></div></article>
-        <article className="type-card"><div><span>03 / LONG DISTANCE</span><h3>Outstation</h3><p>Ek shehar se doosre shehar tak.</p></div></article>
+        <article className="type-card"><img src="https://images.unsplash.com/photo-1663852397535-18292e115327?auto=format&fit=crop&w=640&q=55" alt="Car for local town rides" loading="lazy"/><div><span>01 / CITY & TOWN</span><h3>Local rides</h3><p>Market, station, hospital ya daily travel.</p></div></article>
+        <article className="type-card"><img src="https://images.unsplash.com/photo-1642345830428-612be5186aba?auto=format&fit=crop&w=640&q=55" alt="Family vehicle for comfortable travel" loading="lazy"/><div><span>02 / FAMILY TRAVEL</span><h3>Comfort rides</h3><p>Family aur group ke safar ke liye.</p></div></article>
+        <article className="type-card"><img src="https://images.unsplash.com/photo-1701879440498-dec790eb579a?auto=format&fit=crop&w=640&q=55" alt="Car on a long-distance road journey" loading="lazy"/><div><span>03 / LONG DISTANCE</span><h3>Outstation</h3><p>Ek shehar se doosre shehar tak.</p></div></article>
       </div>
       <p className="photo-credit">Illustrative travel photography: <a href="https://unsplash.com/photos/a-car-driving-on-a-road-x-dyoS4EmM8" target="_blank" rel="noreferrer">Vignesh Rajendran</a>, <a href="https://unsplash.com/photos/a-white-car-parked-on-a-dirt-road-ns6i92wlfsM" target="_blank" rel="noreferrer">Shabd Raj</a> and <a href="https://unsplash.com/photos/a-car-driving-down-a-road-at-sunset-kCwqxF6-b2M" target="_blank" rel="noreferrer">Sukumar Bardoloi</a> / Unsplash.</p>
     </section>
