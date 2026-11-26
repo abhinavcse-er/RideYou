@@ -116,8 +116,6 @@ export default function App() {
       <div className="section-heading"><div><div className="eyebrow"><i/> AVAILABLE VEHICLES</div><h2>Apni gaadi <em>chuniye.</em></h2></div><p>Yahan sirf approved aur available gaadiyan dikhayi jaati hain.</p></div>
       {loading?<div className="empty">Gaadiyon ki list load ho rahi hai…</div>:vehicles.length===0?<div className="empty">{error||'Abhi koi approved gaadi available nahi hai. Baad mein dobara check karein.'}</div>:
       <div className="vehicle-grid">{vehicles.map(vehicle=><VehicleCard key={vehicle.id} vehicle={vehicle} selected={selected===vehicle.id} onSelect={id=>{setSelected(id);setNotice('Gaadi select ho gayi. Booking form bharein.');}} />)}</div>}
-        <div className="vehicle-card-body"><h3>{v.vehicle_name}</h3><p>{v.seats} seater</p><strong>{money(v.base_fare)}</strong><button className="mini primary" onClick={()=>{setSelected(v.id);setNotice('Gaadi select ho gayi. Booking form bharein.');}}>Is gaadi ko chunein</button></div>
-      </article>)}</div>}
     </section>
 
     <section className="booking" id="booking"><div className="wrap booking-grid">
