@@ -6,6 +6,8 @@ import { isDatabaseConfigured } from './config/supabase.js';
 import bookingRoutes from './modules/bookings/booking.routes.js';
 import authRoutes from './modules/auth/auth.routes.js';
 import mediatorRoutes from './modules/mediators/mediator.routes.js';
+import ownerRoutes from './modules/owners/owner.routes.js';
+import vehicleRoutes from './modules/vehicles/vehicle.routes.js';
 import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 
 const app = express();
@@ -32,6 +34,8 @@ app.get('/api/health', (_req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/mediators', mediatorRoutes);
+app.use('/api/owners', ownerRoutes);
+app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api', notFoundHandler);
 app.use(errorHandler);
