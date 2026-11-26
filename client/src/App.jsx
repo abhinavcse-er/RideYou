@@ -1,23 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
+import SiteHeader from './components/SiteHeader.jsx';
+import SiteFooter from './components/SiteFooter.jsx';
+import VehicleCard from './components/VehicleCard.jsx';
+import { api } from './services/api.js';
+import { authClient } from './services/auth.js';
+import { money, formatDate, initialBooking } from './utils/format.js';
+
 import { createClient } from '@supabase/supabase-js';
 
-const API = import.meta.env.VITE_API_URL || '';
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const authClient = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
-const money = value => value == null ? 'Fare confirm hoga' : new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(Number(value));
-const formatDate = value => new Date(value).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'});
-const initialBooking = { name:'', phone:'', pickup:'', destination:'', rideDate:'', rideTime:'', passengers:1, tripType:'local', note:'' };
-
-async function api(path, options = {}, token) {
-  const response = await fetch(API + path, {
-    ...options,
-    headers: { 'Content-Type':'application/json', ...(token ? { Authorization:'Bearer ' + token } : {}), ...(options.headers || {}) },
-  });
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(payload.error || 'Request complete nahi ho payi.');
-  return payload;
-}
 
 export default function App() {
   const [vehicles,setVehicles] = useState([]);
@@ -116,11 +106,7 @@ export default function App() {
   }
 
   return <main>
-    <header className="top wrap" id="home">
-      <a className="logo" href="#home"><span className="mark">R</span><span>Ride<span className="orange">You</span><small>BIHAR · INDIA</small></span></a>
-      <nav className="main-nav"><a href="#vehicles">Gaadiyan</a><a href="#how">Booking kaise karein</a><a href="#workspace">Account</a></nav>
-      <div className="top-actions"><span className={'service-state '+(health==='online'?'online':'')}>{health==='online'?'SERVICE ONLINE':health==='offline'?'SERVICE OFFLINE':'CONNECTING'}</span><a className="top-link" href="#vehicles">Gaadi dekhein ↓</a></div>
-    </header>
+    <SiteHeader health={health} />
 
     <section className="hero wrap">
       <div><div className="eyebrow"><i/> BIHAR KI APNI RIDE SERVICE</div>
@@ -135,8 +121,7 @@ export default function App() {
     <section className="vehicle-market wrap" id="vehicles">
       <div className="section-heading"><div><div className="eyebrow"><i/> AVAILABLE VEHICLES</div><h2>Apni gaadi <em>chuniye.</em></h2></div><p>Yahan sirf approved aur available gaadiyan dikhayi jaati hain.</p></div>
       {loading?<div className="empty">Gaadiyon ki list load ho rahi hai…</div>:vehicles.length===0?<div className="empty">{error||'Abhi koi approved gaadi available nahi hai. Baad mein dobara check karein.'}</div>:
-      <div className="vehicle-grid">{vehicles.map(v=><article className={'vehicle-card '+(selected===v.id?'vehicle-selected':'')} key={v.id}>
-        {v.photo_url?<img src={v.photo_url} alt={v.vehicle_name}/>:<div className="vehicle-placeholder">RideYou</div>}
+      <div className="vehicle-grid">{vehicles.map(vehicle=><VehicleCard key={vehicle.id} vehicle={vehicle} selected={selected===vehicle.id} onSelect={id=>{setSelected(id);setNotice('Gaadi select ho gayi. Booking form bharein.');}} />)}</div>}}
         <div className="vehicle-card-body"><h3>{v.vehicle_name}</h3><p>{v.seats} seater</p><strong>{money(v.base_fare)}</strong><button className="mini primary" onClick={()=>{setSelected(v.id);setNotice('Gaadi select ho gayi. Booking form bharein.');}}>Is gaadi ko chunein</button></div>
       </article>)}</div>}
     </section>
@@ -184,6 +169,6 @@ export default function App() {
       </div>}
     </div></section>
 
-    <footer className="footer wrap"><a className="logo" href="#home"><span className="mark">R</span><span>Ride<span className="orange">You</span><small>BIHAR · INDIA</small></span></a><p>Gaon se shehar tak, safar aasaan.</p><small>© {new Date().getFullYear()} RideYou. All rights reserved.</small></footer>
+    <SiteFooter />
   </main>;
 }
