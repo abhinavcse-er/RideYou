@@ -81,7 +81,7 @@ router.post('/vehicles', requireAuth, requireRole('owner'), async (req, res, nex
         owner_id: owner.id,
         driver_id: input.driverId || null,
         vehicle_name: input.vehicleName,
-        registration_number: input.registrationNumber.replace(/\\s+/g, '').toUpperCase(),
+        registration_number: input.registrationNumber.replace(/\s+/g, '').toUpperCase(),
         seats: input.seats,
         base_fare: input.baseFare ?? null,
         status: 'pending',
