@@ -173,3 +173,11 @@ h1,h2{color:#183d2b;letter-spacing:-1px}h1 em,h2 em,.orange{color:#247a43}
 .hero-visual:after{content:"";position:absolute;left:10%;right:8%;bottom:18%;height:34%;border-radius:50% 50% 10px 10px;background:#247a43;box-shadow:0 14px 0 -4px #183d2b}
 .type-card{background:linear-gradient(135deg,#dcebdc,#f5f2df)}
 .type-card:after{background:linear-gradient(0deg,#183d2be8 0%,#247a4320 100%)}
+
+.hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-visual{display:none}
+.type-card{position:relative;overflow:hidden;background:#e5eee4}
+.type-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.type-card>div{position:relative;z-index:1}
+.type-card:after{z-index:0}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
