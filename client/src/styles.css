@@ -167,3 +167,9 @@ h1,h2{color:#183d2b;letter-spacing:-1px}h1 em,h2 em,.orange{color:#247a43}
  .role-tabs button{font-size:12px}
 }
 @media(max-width:380px){.hero h1{font-size:36px}.feature-cards{grid-template-columns:1fr}.feature-card{min-height:0}}
+
+.hero-visual{position:absolute;inset:0;background:linear-gradient(135deg,#dcebdc 0%,#f3f7ee 52%,#c4dbc6 100%)}
+.hero-visual:before{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:#f3d89b;right:12%;top:12%}
+.hero-visual:after{content:"";position:absolute;left:10%;right:8%;bottom:18%;height:34%;border-radius:50% 50% 10px 10px;background:#247a43;box-shadow:0 14px 0 -4px #183d2b}
+.type-card{background:linear-gradient(135deg,#dcebdc,#f5f2df)}
+.type-card:after{background:linear-gradient(0deg,#183d2be8 0%,#247a4320 100%)}
