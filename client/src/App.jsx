@@ -106,7 +106,6 @@ export default function App() {
               <article className="feature-card"><b>◉</b><h4>Private communication</h4><p>Customer aur driver in-app chat ya masked calling se baat karein — personal number public na ho.</p><span className="feature-state plan-state">LAUNCH SCOPE</span></article>
             </div>
           </div>
-        </div>
           <div className="feature-group">
             <div className="group-label"><span>04</span><div><small>PLATFORM FOUNDATION</small><h3>Trust & scale</h3></div></div>
             <div className="feature-cards">
@@ -116,6 +115,7 @@ export default function App() {
               <article className="feature-card"><b>▣</b><h4>Android app roadmap</h4><p>Same secured backend ke saath customer aur driver Android experience; future updates ek hi system se.</p><span className="feature-state plan-state">FUTURE RELEASE</span></article>
             </div>
           </div>
+        </div>
         <div className="privacy-strip"><div className="privacy-icon">✦</div><div><small>PRIVACY BY DESIGN</small><h3>Customer ko owner ka contact. Driver ka personal number private.</h3><p>Public website par RideYou ka official contact/WhatsApp rahega. Driver-customer communication secure in-app channel ke through plan ki gayi hai.</p></div><span className="feature-state plan-state">PRODUCTION FEATURE</span></div>
       </div>
     </section>
