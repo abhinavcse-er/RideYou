@@ -110,3 +110,60 @@
  .roadmap-row{align-items:flex-start;flex-direction:column}
 }
 @media(max-width:380px){.feature-cards{grid-template-columns:1fr}.feature-card{min-height:0}.feature-card p{font-size:10px}}
+
+
+/* Rural-first UI: simple colours, readable controls, fewer visual effects */
+:root{font-family:Arial,Helvetica,sans-serif;color:#24352b;background:#fff;font-synthesis:none}
+html{scroll-behavior:auto}body{background:#fff;color:#24352b}
+h1,h2,.logo,.form-title h3,.panel-title h3,.photo-caption strong,.type-card h3,.journey-steps b,.feature-card h4,.group-label h3{font-family:Arial,Helvetica,sans-serif;letter-spacing:normal}
+h1,h2{color:#183d2b;letter-spacing:-1px}h1 em,h2 em,.orange{color:#247a43}
+.logo{color:#183d2b}.logo small{letter-spacing:1px}.mark{background:#247a43;color:#fff;border-radius:8px}
+.top{height:68px}.top-link{border-color:#247a43;color:#20683b;border-radius:7px}
+.eyebrow{color:#247a43;letter-spacing:1px}.eyebrow i{background:#e3a12f}
+.cta,.submit,.role-tabs button.active,.mini.primary,.journey-steps article>span{background:#247a43;border-color:#247a43;color:#fff;border-radius:7px}
+.cta b,.submit span{color:#fff}.cta:hover,.submit:hover,.mini.primary:hover{background:#195e33}
+.intro,.booking-copy>p{color:#536458}.hero{padding:36px 0 42px;gap:25px}
+.hero h1{font-size:clamp(38px,5vw,56px);line-height:1.12}
+.hero-photo{height:300px;border-radius:8px;box-shadow:none}
+.features{border-color:#e5ebe5;margin-bottom:42px;padding:17px 0}.features b{color:#247a43}
+.features small,.footer p,.footer>small{color:#657468}
+.ride-types{padding-bottom:42px}.section-heading h2{font-size:36px}.type-card{border-radius:8px;min-height:220px}
+.booking{background:#f3f7f2;padding:48px 0}.booking-grid{gap:40px}.booking-copy{position:static}
+.booking-copy h2{font-size:44px}.booking-copy aside{background:#e7f1e7;color:#405a47}
+.form{border:1px solid #dce7dc;border-radius:8px;box-shadow:0 4px 16px #183d2b0c;padding:24px}
+.form-title h3,.panel-title h3{color:#183d2b}
+.form input,.form select,.form textarea,.filters input,.filters select,.lookup input,.action-row input,.action-row select{font:16px Arial,Helvetica,sans-serif;border:1px solid #cbd8cc;border-radius:6px;background:#fff;color:#24352b;padding:13px}
+.form label{font-size:13px;color:#334b39}.form input:focus,.form select:focus,.form textarea:focus{border-color:#247a43;box-shadow:0 0 0 2px #247a4320}
+.submit{font:700 16px Arial,Helvetica,sans-serif;padding:15px}.privacy{font-size:11px;color:#647568}
+.workspace{background:#fff;padding:48px 0}.workspace-head h2{font-size:40px}
+.demo-pill{background:#fff3d9;color:#805619;letter-spacing:.4px}
+.panel{border:1px solid #dce7dc;border-radius:8px;box-shadow:none;padding:20px}
+.role-tabs button,.mini{border:1px solid #cbd8cc;background:#fff;color:#245b36;border-radius:6px;font:700 13px Arial,Helvetica,sans-serif;padding:11px 14px}
+.stats>div{background:#f0f6f0;border:1px solid #e1ebe1}.stats b{color:#247a43}.stats small{font-size:11px;color:#526457}
+.showcase{background:#f3f7f2;color:#24352b;padding:48px 0}.showcase:before{display:none}
+.showcase-head .eyebrow,.journey-head .eyebrow{color:#247a43}
+.showcase-head h2,.journey-head h2{color:#183d2b;font-size:40px;letter-spacing:-1px}
+.showcase-head h2 em,.journey-head h2 em{color:#247a43}
+.showcase-head>p,.journey-head>p{color:#536458;font-size:14px}
+.feature-groups{gap:24px;margin-top:30px}.feature-group{grid-template-columns:170px 1fr;gap:16px}
+.group-label>span{color:#247a43;border-color:#a9c9af}.group-label small{color:#52735a;letter-spacing:.7px}.group-label h3{color:#183d2b}
+.feature-cards{gap:9px}.feature-card{background:#fff;border:1px solid #dce7dc;border-radius:7px;min-height:165px;padding:14px;box-shadow:none}
+.feature-card>b{background:#e7f1e7;color:#247a43;border-radius:6px}.feature-card h4{color:#24352b;font-size:13px}.feature-card p{color:#58695d;font-size:11px}
+.demo-state{background:#e5f3e8;color:#21663a}.plan-state{background:#fff1d9;color:#805619}
+.privacy-strip{background:#e7f1e7;border:1px solid #d4e5d5;border-radius:7px}.privacy-icon{background:#247a43;color:#fff}
+.privacy-strip small,.roadmap-row small{color:#247a43}.privacy-strip h3{color:#183d2b}.privacy-strip p{color:#536458;font-size:12px}
+.journey-section{background:#fff;padding:48px 0}.journey-steps:before{background:#cbd8cc}
+.journey-steps article>span{border-color:#fff}.journey-steps b{color:#24352b}.journey-steps p{color:#5d6d60;font-size:11px}
+.roadmap-row{background:#f3f7f2;border-color:#dce7dc;border-radius:7px}.roadmap-row strong{color:#334b39}
+.footer{border-color:#e5ebe5}.demo-warning{color:#805619}
+@media(max-width:760px){
+ .wrap{width:calc(100% - 28px)}.top{height:62px}.hero{padding:24px 0 30px;gap:20px}
+ .hero h1{font-size:42px;letter-spacing:-.5px}.hero-photo{height:230px}
+ .ride-types{padding-bottom:30px}.section-heading h2{font-size:32px}.type-card{min-height:180px}
+ .booking{padding:34px 0}.booking-copy h2{font-size:36px}.form{padding:18px 14px}
+ .workspace,.showcase,.journey-section{padding:36px 0}.showcase-head h2,.journey-head h2{font-size:33px}
+ .feature-group{grid-template-columns:1fr}.feature-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .feature-card{min-height:175px}.journey-steps{margin-top:24px}.panel{padding:15px 12px}
+ .role-tabs button{font-size:12px}
+}
+@media(max-width:380px){.hero h1{font-size:36px}.feature-cards{grid-template-columns:1fr}.feature-card{min-height:0}}
