@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-const MEDIATORS = ['Sujjet Kumar', 'MD Kaif'];
+const MEDIATORS = ['Booking Manager', 'Booking Sahayak'];
 const VEHICLE_KEY = 'rideyou-demo-vehicles-v2';
 const BOOKING_KEY = 'rideyou-demo-bookings-v2';
 const OWNER_KEY = 'rideyou-demo-owners-v2';
@@ -113,7 +113,7 @@ export default function App() {
     </div></section>
 
     <section className="journey-section" id="how"><div className="wrap"><div className="journey-head"><div><div className="eyebrow"><i/> SIMPLE BOOKING PROCESS</div><h2>Customer aur owner ke beech<br/><em>RideYou mediator.</em></h2></div><p>Customer ka direct owner/driver se contact nahi hoga. Mediator hi availability, fare aur confirmation coordinate karega.</p></div>
-      <div className="journey-steps"><article><span>01</span><b>Owner gaadi list kare</b><p>Owner vehicle photo, details aur driver information upload karega.</p></article><article><span>02</span><b>Customer gaadi chune</b><p>Customer listing dekhkar booking request bhejega.</p></article><article><span>03</span><b>Mediator owner se baat kare</b><p>Sujjet Kumar ya MD Kaif availability aur fare confirm karenge.</p></article><article><span>04</span><b>Customer ko confirmation</b><p>Mediator fare batayega; customer accept karega tab booking pakki.</p></article><article><span>05</span><b>Safar shuru</b><p>Confirmed booking par driver aur gaadi ki details customer ko milengi.</p></article></div>
+      <div className="journey-steps"><article><span>01</span><b>Owner gaadi list kare</b><p>Owner vehicle photo, details aur driver information upload karega.</p></article><article><span>02</span><b>Customer gaadi chune</b><p>Customer listing dekhkar booking request bhejega.</p></article><article><span>03</span><b>Mediator owner se baat kare</b><p>Booking Manager ya Booking Sahayak availability aur fare confirm karenge.</p></article><article><span>04</span><b>Customer ko confirmation</b><p>Mediator fare batayega; customer accept karega tab booking pakki.</p></article><article><span>05</span><b>Safar shuru</b><p>Confirmed booking par driver aur gaadi ki details customer ko milengi.</p></article></div>
     </div></section>
 
     <section className="workspace" id="workspace"><div className="wrap">
