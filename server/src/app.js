@@ -4,6 +4,8 @@ import helmet from 'helmet';
 import { env } from './config/env.js';
 import { isDatabaseConfigured } from './config/supabase.js';
 import bookingRoutes from './modules/bookings/booking.routes.js';
+import authRoutes from './modules/auth/auth.routes.js';
+import mediatorRoutes from './modules/mediators/mediator.routes.js';
 import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 
 const app = express();
@@ -28,6 +30,8 @@ app.get('/api/health', (_req, res) => {
   });
 });
 
+app.use('/api/auth', authRoutes);
+app.use('/api/mediators', mediatorRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api', notFoundHandler);
 app.use(errorHandler);
