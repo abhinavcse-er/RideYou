@@ -210,3 +210,10 @@ h1,h2{color:#183d2b;letter-spacing:-1px}h1 em,h2 em,.orange{color:#247a43}
 .confirm-owner{display:flex;gap:9px;align-items:center;margin:12px 0;font-size:12px;color:#365640}
 .confirm-owner input{width:18px;height:18px;accent-color:#247a43}
 @media(max-width:760px){.vehicle-market{padding:0 0 34px}.vehicle-grid{grid-template-columns:1fr}.vehicle-card>img{height:205px}.owner-listing>img{width:88px;height:72px}.owner-listing{align-items:flex-start}}
+
+
+/* Live application states */
+.service-state{font-size:10px;font-weight:800;letter-spacing:.5px;color:#8a5c16;background:#fff3d9;border-radius:6px;padding:8px 10px}.service-state.online{color:#21663a;background:#e5f3e8}
+.vehicle-placeholder{height:190px;display:grid;place-items:center;background:linear-gradient(135deg,#e5eee4,#f5f2df);font-size:28px;font-weight:800;color:#247a43}
+.notice.error{background:#fff0ee;color:#a33327;border:1px solid #f2c8c2;padding:12px;border-radius:6px;font-size:13px}
+.reference-card{display:grid;gap:5px;background:#edf6ee;border:1px solid #cfe3d1;padding:14px;border-radius:7px;color:#1c5f35}.reference-card small{font-size:10px;letter-spacing:1px}.reference-card strong{font-size:20px;letter-spacing:1px}.reference-card span{font-size:11px}
