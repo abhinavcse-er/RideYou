@@ -17,3 +17,22 @@ export async function postBooking(req, res, next) {
     return next(error);
   }
 }
+
+
+export async function getBookingStatus(req, res, next) {
+  const reference = String(req.params.reference || '').trim();
+  const phone = String(req.query.phone || '').trim();
+  if (!/^RY-[A-Z0-9-]{5,40}$/.test(reference) || !/^[6-9][0-9]{9}$/.test(phone)) {
+    return res.status(400).json({ error: 'Booking reference aur mobile number check karein.' });
+  }
+  try {
+    const { supabase } = await import('../../config/supabase.js');
+    if (!supabase) return res.status(503).json({ error: 'Booking service is not configured.' });
+    const { data, error } = await supabase.from('bookings')
+      .select('reference, pickup, destination, ride_at, status, quoted_fare, passengers, trip_type')
+      .eq('reference', reference).eq('customer_phone', phone).maybeSingle();
+    if (error) throw error;
+    if (!data) return res.status(404).json({ error: 'Is reference aur mobile se booking nahi mili.' });
+    return res.json({ ok: true, booking: data });
+  } catch (error) { return next(error); }
+}
