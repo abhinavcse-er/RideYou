@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const createBookingSchema = z.object({
+  vehicleId: z.string().uuid(),
   name: z.string().trim().min(2).max(80),
   phone: z.string().regex(/^[6-9]\d{9}$/),
   pickup: z.string().trim().min(2).max(180),
