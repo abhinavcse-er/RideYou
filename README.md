@@ -1,30 +1,35 @@
-# RideYou — Bihar Ride Booking Demo
+# RideYou — Bihar ride booking platform
 
-A mobile-first ride-booking prototype for Bihar, designed around simple customer booking, manual fare approval and driver assignment.
+RideYou connects customers with approved local vehicle owners through a simple booking workflow. Customers request a vehicle; the RideYou Booking Team checks availability and confirms the fare before a trip is accepted.
 
-## Live demo (GitHub Pages)
+## Website
 
-This repository is configured to build and deploy the frontend to GitHub Pages whenever changes are pushed to `main`.
+GitHub Pages deployment: https://abhinavcse-er.github.io/RideYou/
 
-After the first successful workflow run, open:
-`https://abhinavcse-er.github.io/RideYou/`
+The frontend is API-driven. Booking requests and vehicle listings are fetched from the RideYou server; the browser is not used as the source of truth.
 
-If Pages has not been enabled yet, go to **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+## Architecture
 
-## Demo features
+- **Frontend:** React + Vite, deployed as a static website.
+- **API:** Node.js + Express, modular routes and services.
+- **Database and authentication:** Supabase PostgreSQL and Supabase Auth.
+- **Roles:** customer, vehicle owner, driver, and two invite-only Booking Team accounts.
+- **Security:** server-side role checks; Supabase service-role key stays on the server.
 
-- Hindi-friendly, responsive customer booking form
-- Booking reference and local browser persistence
-- Customer booking lookup by mobile number
-- Demo admin workflow: review requests, quote fare, see acceptance, assign driver and vehicle
-- Demo driver workflow: view assigned trips, start and complete a trip
-- Search, status filters and JSON export
+## Environment
 
-## Important demo limitations
+Frontend (`client/.env` or GitHub Actions variables):
+- `VITE_API_URL`: deployed API origin, for example your Render service URL.
+- `VITE_SUPABASE_URL`: Supabase project URL.
+- `VITE_SUPABASE_ANON_KEY`: Supabase publishable/anon key only.
 
-**This GitHub Pages version is a frontend-only prototype.** Demo bookings are saved in the current browser's local storage. They do not sync between devices or users. Role switching is for demonstration only and is NOT authentication or authorization. Do not enter real customer information.
+Backend (`server/.env` or Render environment):
+- `PORT`
+- `CLIENT_ORIGIN` (comma-separated allowed frontend origins)
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY` (server only; never expose in frontend or commit)
 
-The connected Supabase project is not accessed by this static demo. Never put a Supabase service-role/secret key in frontend code or GitHub Pages. Real multi-user bookings, secure admin/driver accounts, database-backed assignments, vehicle conflict prevention, photos, customer-driver chat and masked calling require a secured backend/API and additional database policies before launch.
+Copy `client/.env.example` to `client/.env` for local frontend configuration and `server/.env.example` to `server/.env` for local API configuration.
 
 ## Local development
 
@@ -35,24 +40,24 @@ npm install
 npm run dev
 ```
 
-Open the Vite URL shown in the terminal (usually http://localhost:5173).
+## Current implementation
 
-Build the static site:
+- Live vehicle catalogue endpoint; only active vehicles are public.
+- Public booking creation validates the selected active vehicle and passenger capacity.
+- Booking reference + phone based private status lookup.
+- Supabase SMS OTP sign-in for pre-provisioned vehicle-owner accounts.
+- Owner vehicle registration endpoint; owner must be verified before listing.
+- Separate API modules for bookings, owners, vehicles, authentication and Booking Team identity.
 
-```bash
-npm run build
-```
+## Remaining launch requirements
 
-Output: `client/dist`.
+Before accepting real public bookings, finish and verify:
+1. Booking Team queue, fare quote, customer acceptance, cancellation and audit trail.
+2. Driver registration and private driver assignment.
+3. Secure vehicle/driver photo upload using Supabase Storage.
+4. Database transaction/RPC for conflict-safe assignment and complete RLS/security review.
+5. Provision the two Booking Team accounts and verified owner profiles.
+6. Configure the Render API URL, Supabase SMS provider, frontend environment and allowed CORS origins.
+7. End-to-end testing, monitoring, backup/restore testing and abuse controls.
 
-## Planned production milestones
-
-1. Secure authentication and role-based API permissions (two invite-only admins, drivers and customers).
-2. Supabase-backed booking, quote/acceptance and audit history.
-3. Transaction-safe vehicle/driver assignment to prevent double booking.
-4. Private driver and vehicle photo storage.
-5. Customer-driver chat without exposing personal phone numbers.
-6. Backups, restore tests, abuse protection, monitoring and load/security testing.
-7. Android app using the same secured backend.
-
-Free-tier hosting and database quotas can pause or limit service; verify current limits and backup options before a public launch.
+Free-tier services may sleep, pause or impose quotas. Do not treat this setup as production-reliable until the above checks are complete.
