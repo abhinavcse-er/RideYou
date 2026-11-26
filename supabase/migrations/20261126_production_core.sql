@@ -45,7 +45,7 @@ create table if not exists public.mediators (
   id uuid primary key default gen_random_uuid(),
   profile_id uuid not null unique references public.profiles(id) on delete restrict,
   display_name text not null unique
-    check (display_name in ('Sujjet Kumar', 'MD Kaif')),
+    check (display_name in ('Booking Manager', 'Booking Sahayak')),
   active boolean not null default true,
   created_at timestamptz not null default now()
 );
