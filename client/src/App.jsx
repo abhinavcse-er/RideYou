@@ -52,7 +52,7 @@ export default function App() {
   return <main>
     <header className="top wrap">
       <a className="logo" href="#home"><span className="mark">R</span><span>Ride<span className="orange">You</span><small>BIHAR · INDIA</small></span></a>
-      <div className="top-actions"><span className="demo-pill">DEMO MODE</span><a className="top-link" href="#booking">Book a ride ↗</a></div>
+      <nav className="main-nav"><a href="#features">Features</a><a href="#journey">How it works</a><a href="#workspace">Live demo</a></nav><div className="top-actions"><span className="demo-pill">CLIENT PREVIEW</span><a className="top-link" href="#booking">Book a ride ↗</a></div>
     </header>
 
     <section className="hero wrap" id="home">
@@ -74,6 +74,54 @@ export default function App() {
       </div>
       <p className="photo-credit">Illustrative travel photography: <a href="https://unsplash.com/photos/a-car-driving-on-a-road-x-dyoS4EmM8" target="_blank" rel="noreferrer">Vignesh Rajendran</a>, <a href="https://unsplash.com/photos/a-white-car-parked-on-a-dirt-road-ns6i92wlfsM" target="_blank" rel="noreferrer">Shabd Raj</a> and <a href="https://unsplash.com/photos/a-car-driving-down-a-road-at-sunset-kCwqxF6-b2M" target="_blank" rel="noreferrer">Sukumar Bardoloi</a> / Unsplash.</p>
     </section>
+
+    <section className="showcase" id="features">
+      <div className="wrap">
+        <div className="showcase-head"><div><div className="eyebrow"><i/> ONE PLATFORM · THREE EXPERIENCES</div><h2>RideYou ka poora<br/><em>system, ek jagah.</em></h2></div><p>Customer ke simple booking experience se lekar admin ke complete control aur driver ke trip updates tak — ek connected ride operation.</p></div>
+        <div className="feature-groups">
+          <div className="feature-group">
+            <div className="group-label"><span>01</span><div><small>FOR PASSENGERS</small><h3>Customer experience</h3></div></div>
+            <div className="feature-cards">
+              <article className="feature-card"><b>↗</b><h4>Easy village-friendly booking</h4><p>Simple form, clear Hindi-friendly labels. Customer ko sirf apna naam, mobile aur pickup/destination dena hai.</p><span className="feature-state demo-state">DEMO PREVIEW</span></article>
+              <article className="feature-card"><b>₹</b><h4>Fare before confirmation</h4><p>Team fare quote bhejegi. Customer accept kare tabhi booking aage badhegi — no surprise pricing.</p><span className="feature-state demo-state">DEMO PREVIEW</span></article>
+              <article className="feature-card"><b>◎</b><h4>Booking status & history</h4><p>Reference number se request, fare, driver assignment aur trip completion ka status dekh sakega.</p><span className="feature-state demo-state">DEMO PREVIEW</span></article>
+              <article className="feature-card"><b>♧</b><h4>Driver & vehicle details</h4><p>Assignment ke baad assigned driver, vehicle name/number aur approved photo customer ko dikh sakti hai.</p><span className="feature-state plan-state">LAUNCH SCOPE</span></article>
+            </div>
+          </div>
+          <div className="feature-group">
+            <div className="group-label"><span>02</span><div><small>FOR OPERATIONS TEAM</small><h3>Admin control room</h3></div></div>
+            <div className="feature-cards">
+              <article className="feature-card"><b>▤</b><h4>All bookings in one dashboard</h4><p>New, quoted, accepted, assigned, started, completed aur cancelled requests ko search/filter karein.</p><span className="feature-state demo-state">DEMO PREVIEW</span></article>
+              <article className="feature-card"><b>⇄</b><h4>Manual fare & approval</h4><p>Admin route aur ride details dekhkar fare set kare. Customer approval ke bina assignment nahi.</p><span className="feature-state demo-state">DEMO PREVIEW</span></article>
+              <article className="feature-card"><b>▣</b><h4>Driver & vehicle allocation</h4><p>Available driver aur suitable vehicle choose karein; trip ka assignment record maintain ho.</p><span className="feature-state demo-state">DEMO PREVIEW</span></article>
+              <article className="feature-card"><b>◷</b><h4>Fleet & booking oversight</h4><p>Vehicle availability, trip schedule, booking history, cancellations aur operational reports.</p><span className="feature-state plan-state">LAUNCH SCOPE</span></article>
+            </div>
+          </div>
+          <div className="feature-group">
+            <div className="group-label"><span>03</span><div><small>FOR DRIVERS</small><h3>Driver workspace</h3></div></div>
+            <div className="feature-cards">
+              <article className="feature-card"><b>⌖</b><h4>Assigned trip list</h4><p>Driver ko apni assigned ride, pickup, destination, passenger aur schedule dikhe.</p><span className="feature-state demo-state">DEMO PREVIEW</span></article>
+              <article className="feature-card"><b>▶</b><h4>Start & complete trip</h4><p>Driver trip start aur complete mark kare. Status customer/admin view mein update ho.</p><span className="feature-state demo-state">DEMO PREVIEW</span></article>
+              <article className="feature-card"><b>▧</b><h4>Vehicle & profile details</h4><p>Driver ko allocated vehicle, basic trip instructions aur profile information mile.</p><span className="feature-state plan-state">LAUNCH SCOPE</span></article>
+              <article className="feature-card"><b>◉</b><h4>Private communication</h4><p>Customer aur driver in-app chat ya masked calling se baat karein — personal number public na ho.</p><span className="feature-state plan-state">LAUNCH SCOPE</span></article>
+            </div>
+          </div>
+        </div>
+        <div className="privacy-strip"><div className="privacy-icon">✦</div><div><small>PRIVACY BY DESIGN</small><h3>Customer ko owner ka contact. Driver ka personal number private.</h3><p>Public website par RideYou ka official contact/WhatsApp rahega. Driver-customer communication secure in-app channel ke through plan ki gayi hai.</p></div><span className="feature-state plan-state">PRODUCTION FEATURE</span></div>
+      </div>
+    </section>
+
+    <section className="journey-section" id="journey"><div className="wrap">
+      <div className="journey-head"><div><div className="eyebrow"><i/> HOW A RIDE MOVES</div><h2>Request se destination tak,<br/><em>har step clear.</em></h2></div><p>Manual fare approval aur admin assignment ke saath controlled booking flow.</p></div>
+      <div className="journey-steps">
+        <article><span>01</span><b>Customer request</b><p>Customer pickup, destination, date aur passenger details bhejta hai.</p></article>
+        <article><span>02</span><b>Admin quotes fare</b><p>Admin request review karke fare share karta hai.</p></article>
+        <article><span>03</span><b>Customer approves</b><p>Customer quote accept kare tabhi ride confirm process aage badhe.</p></article>
+        <article><span>04</span><b>Driver + vehicle assigned</b><p>Admin suitable driver aur vehicle allocate karta hai.</p></article>
+        <article><span>05</span><b>Trip updates</b><p>Driver start aur complete status update karta hai; customer progress dekh sakta hai.</p></article>
+      </div>
+      <div className="roadmap-row"><div><small>SAFETY & RELIABILITY ROADMAP</small><strong>No double-booking · Secure role login · Audit trail · Notifications · Backups</strong></div><span className="feature-state plan-state">BACKEND IMPLEMENTATION</span></div>
+    </div></section>
 
     <section className="features wrap">
       <div><b>01</b><strong>Simple booking</strong><small>Bas kuch zaroori details</small></div>
