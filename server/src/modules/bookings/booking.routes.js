@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
-import { postBooking } from './booking.controller.js';
+import { postBooking, getBookingStatus } from './booking.controller.js';
 
 const router = Router();
 
@@ -13,6 +13,7 @@ const bookingLimiter = rateLimit({
   message: { error: 'Bahut saari requests bheji gayi hain. Kripya 15 minute baad try karein.' },
 });
 
+router.get('/:reference', bookingLimiter, getBookingStatus);
 router.post('/', bookingLimiter, postBooking);
 
 export default router;
