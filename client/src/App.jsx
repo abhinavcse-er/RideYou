@@ -2,11 +2,12 @@ import { useEffect, useMemo, useState } from 'react';
 import SiteHeader from './components/SiteHeader.jsx';
 import SiteFooter from './components/SiteFooter.jsx';
 import VehicleCard from './components/VehicleCard.jsx';
+import HeroSection from './components/HeroSection.jsx';
+import HowItWorks from './components/HowItWorks.jsx';
 import { api } from './services/api.js';
 import { authClient } from './services/auth.js';
 import { money, formatDate, initialBooking } from './utils/format.js';
 
-import { createClient } from '@supabase/supabase-js';
 
 
 export default function App() {
@@ -108,15 +109,7 @@ export default function App() {
   return <main>
     <SiteHeader health={health} />
 
-    <section className="hero wrap">
-      <div><div className="eyebrow"><i/> BIHAR KI APNI RIDE SERVICE</div>
-        <h1>Gaadi chuniye,<br/><em>safar pakka kariye.</em></h1>
-        <p className="intro">Apni pasand ki gaadi dekhein aur booking request bhejein. Hamari Booking Team owner se availability aur fare confirm karegi.</p>
-        <a className="cta" href="#vehicles">Available gaadi dekhein <b>↓</b></a>
-        <p className="assure">✓ Owner ki confirmation ke baad hi booking pakki</p>
-      </div>
-      <div className="hero-photo"><img className="hero-image" src="https://images.unsplash.com/photo-1663852397535-18292e115327?auto=format&fit=crop&w=1000&q=65" alt="Car travelling on a road" fetchPriority="high"/><div className="photo-shade"/><div className="photo-caption"><span>SAFAR AAPKA</span><strong>Har raaste par,<br/>aapke saath.</strong><small>Local rides · Outstation journeys</small></div></div>
-    </section>
+    <HeroSection />
 
     <section className="vehicle-market wrap" id="vehicles">
       <div className="section-heading"><div><div className="eyebrow"><i/> AVAILABLE VEHICLES</div><h2>Apni gaadi <em>chuniye.</em></h2></div><p>Yahan sirf approved aur available gaadiyan dikhayi jaati hain.</p></div>
@@ -144,9 +137,7 @@ export default function App() {
       </form>
     </div></section>
 
-    <section className="journey-section" id="how"><div className="wrap"><div className="journey-head"><div><div className="eyebrow"><i/> SIMPLE BOOKING PROCESS</div><h2>Booking ka seedha<br/><em>aur aasaan tareeka.</em></h2></div><p>Customer ka direct owner/driver se contact nahi hoga. Booking Team availability, fare aur confirmation coordinate karegi.</p></div>
-      <div className="journey-steps"><article><span>01</span><b>Owner gaadi register kare</b><p>Owner apni gaadi aur driver ki details submit karega.</p></article><article><span>02</span><b>Customer gaadi chune</b><p>Customer approved listing dekhkar booking request bhejega.</p></article><article><span>03</span><b>Booking Team check kare</b><p>Booking Manager ya Booking Sahayak owner se availability aur fare confirm karenge.</p></article><article><span>04</span><b>Fare ki manzoori</b><p>Customer fare accept karega, tab booking confirm hogi.</p></article><article><span>05</span><b>Safar shuru</b><p>Confirmed booking par zaroori trip details share hongi.</p></article></div>
-    </div></section>
+    <HowItWorks />
 
     <section className="workspace" id="workspace"><div className="wrap">
       <div className="workspace-head"><div><div className="eyebrow"><i/> RIDEYOU ACCOUNT</div><h2>Apna <em>account kholein.</em></h2><p>Vehicle owners ke liye secure login. Customer booking reference se status check kar sakte hain.</p></div></div>
