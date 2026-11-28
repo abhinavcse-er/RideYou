@@ -29,7 +29,7 @@ export async function getBookingStatus(req, res, next) {
     const { supabase } = await import('../../config/supabase.js');
     if (!supabase) return res.status(503).json({ error: 'Booking service is not configured.' });
     const { data, error } = await supabase.from('bookings')
-      .select('reference, pickup, destination, ride_at, status, quoted_fare, passengers, trip_type')
+      .select('reference, pickup, destination, ride_at, status, quoted_fare, passengers, trip_type, vehicles(vehicle_name,vehicle_class,registration_number), drivers(full_name)')
       .eq('reference', reference).eq('customer_phone', phone).maybeSingle();
     if (error) throw error;
     if (!data) return res.status(404).json({ error: 'Is reference aur mobile se booking nahi mili.' });
