@@ -13,7 +13,9 @@ const bookingLimiter = rateLimit({
   message: { error: 'Bahut saari requests bheji gayi hain. Kripya 15 minute baad try karein.' },
 });
 
-router.get('/:reference', bookingLimiter, getBookingStatus);
+const statusLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 60, standardHeaders: 'draft-7', legacyHeaders: false });
+
+router.get('/:reference', statusLimiter, getBookingStatus);
 router.post('/', bookingLimiter, postBooking);
 
 export default router;
