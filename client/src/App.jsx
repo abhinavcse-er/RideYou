@@ -17,5 +17,6 @@ export default function App() {
   <HowItWorks/>
   <AccountSection workspace={ride.workspace} setWorkspace={ride.setWorkspace} reference={ride.reference} setReference={ride.setReference} lookupPhone={ride.lookupPhone} setLookupPhone={ride.setLookupPhone} checkBooking={ride.checkBooking} statusResult={ride.statusResult} session={ride.session} authClient={ride.authClient} authStep={ride.authStep} sendOtp={ride.sendOtp} verifyOtp={ride.verifyOtp} otpPhone={ride.otpPhone} setOtpPhone={ride.setOtpPhone} otp={ride.otp} setOtp={ride.setOtp} error={ride.error} authBusy={ride.authBusy} ownerData={ride.ownerData} ownerVehicles={ride.ownerVehicles} vehicleForm={ride.vehicleForm} setVehicleForm={ride.setVehicleForm} addVehicle={ride.addVehicle}/>
   <SiteFooter/>
+  <a className="mobile-book-cta" href="#booking">Book a ride <span>↗</span></a>
  </main>;
 }
