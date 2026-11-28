@@ -15,9 +15,13 @@ const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 app.use(helmet());
+const allowedClientOrigins = new Set([
+  ...env.clientOrigins,
+  'https://abhinavcse-er.github.io',
+]);
 app.use(cors({
   origin(origin, callback) {
-    if (!origin || env.clientOrigins.includes(origin)) return callback(null, true);
+    if (!origin || allowedClientOrigins.has(origin)) return callback(null, true);
     return callback(new Error('Origin not allowed'));
   },
 }));
