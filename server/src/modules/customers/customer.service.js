@@ -1,6 +1,19 @@
 import { supabase } from '../../config/supabase.js';
 import { hashPassword,verifyPassword,createSessionToken,hashSessionToken } from './customer.password.js';
 function unavailable(){const e=new Error('Customer account service abhi available nahi hai.');e.status=503;return e;}
+
+export async function registerCustomer({name,phone,password}){
+ if(!supabase)throw unavailable();
+ const {data:existing,error:lookupError}=await supabase.from('customer_accounts').select('id').eq('phone',phone).maybeSingle();
+ if(lookupError)throw lookupError;
+ if(existing){const e=new Error('Is mobile number par account pehle se hai. Login karein.');e.status=409;throw e;}
+ const passwordHash=await hashPassword(password);
+ const {data:created,error}=await supabase.from('customer_accounts').insert({full_name:name,phone,password_hash:passwordHash}).select('id,full_name,phone').single();
+ if(!error)return created;
+ if(error.code==='23505'){const e=new Error('Is mobile number par account pehle se hai. Login karein.');e.status=409;throw e;}
+ throw error;
+}
+
 export async function getOrCreateCustomer({name,phone,password}){
  if(!supabase)throw unavailable();
  const {data:existing,error:lookupError}=await supabase.from('customer_accounts').select('id,full_name,phone,password_hash').eq('phone',phone).maybeSingle();
