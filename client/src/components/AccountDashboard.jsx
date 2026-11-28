@@ -19,7 +19,7 @@ export default function AccountDashboard(props){
   };
   const descriptions={
     customer:'Create your customer account before booking, then keep every journey in one place.',
-    owner:'Verify your mobile number, register your owner profile and submit four-wheelers for approval.',
+    owner:'Verify your email, add your mobile contact and register four-wheelers for Admin approval.',
     admin:'Restricted operations access for provisioned RideYou administrators only.',
   };
   return <section className="account-section" id="workspace">
@@ -54,7 +54,7 @@ export default function AccountDashboard(props){
             {workspace==='owner'&&<OwnerPortal {...props}/>}
             {workspace==='admin'&&<AdminPortal {...props}/>}
           </div>
-          <footer className="account-workspace-foot"><span>RIDEYOU · BIHAR, INDIA</span><span>Use only your own registered mobile number</span></footer>
+          <footer className="account-workspace-foot"><span>RIDEYOU · BIHAR, INDIA</span><span>Use an email and contact number you can access</span></footer>
         </main>
       </div>
       <div className="account-bottom-note"><span>Need help?</span> Contact the RideYou Booking Manager for account assistance.</div>
