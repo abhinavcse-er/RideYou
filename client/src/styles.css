@@ -163,3 +163,74 @@ body{background:#fff;color:var(--ink)}
  .admin-session{align-items:flex-start;flex-direction:column}
 }
 @media(max-width:390px){.role-tabs button{font-size:9px}.account-panel{padding:15px}}
+
+/* RideYou visual identity: forest, ivory and warm amber */
+:root{--green:#155c3b;--green-dark:#0c3e29;--ink:#18271f;--muted:#68766d;--line:#e4e8df;--soft:#f6f3eb;--gold:#efad43;--accent:#f4b544}
+body{background:#fff;color:var(--ink)}
+.top{border-bottom-color:#e9e7de;background:#fff}
+.mark,.top-link{background:#155c3b}
+.hero{padding-top:66px;padding-bottom:82px}
+.hero h1{font-size:clamp(46px,5.1vw,68px);line-height:1.02;letter-spacing:-3px}
+.hero h1 em,h2 em{color:#15734a}
+.eyebrow{color:#176343}
+.eyebrow:before{background:#eeb04b}
+.cta,.submit{background:#efad43;color:#17251c;box-shadow:0 9px 24px #d99b352b;border:1px solid #e6a23b}
+.cta:hover,.submit:hover{background:#e59b2d;color:#17251c}
+.cta b,.submit span{color:#173d2a}
+.hero-visual{border-radius:15px;background:#e9e7dc;box-shadow:0 22px 55px #192a1c1c}
+.hero-image,.hero-visual-shade{border-radius:15px}
+.hero-photo-top{background:#183d2dd9}
+.hero-float-card{border:1px solid #eee7d9;border-radius:10px}
+.hero-float-icon{background:#f9edcf;color:#795117}
+.vehicle-card{border-radius:9px;box-shadow:0 5px 20px #1b33250a}
+.vehicle-card:hover{border-color:#d5bd83;box-shadow:0 14px 28px #1b332512}
+.vehicle-tag{background:#f5efdf;color:#77571c}
+.booking-section{background:#f6f3eb}
+.form{border:1px solid #e9e3d6;border-radius:11px;box-shadow:0 15px 42px #2c30220d}
+.form input,.form select,.form textarea{border-radius:6px;background:#fff;border-color:#dedfd5}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:#b88a37;box-shadow:0 0 0 3px #efad4320}
+.booking-assurance{background:#e8efe6}
+.booking-assurance>span{background:#155c3b}
+.journey-steps article{border-radius:9px;box-shadow:0 4px 14px #1b332508}
+.journey-steps article>span{background:#f7efd9;color:#77571c;border-radius:7px}
+.account-section{background:radial-gradient(ellipse at 8% 5%,#e9eee5 0,transparent 38%),#f6f3eb}
+.account-aside{background:linear-gradient(150deg,#1b6041,#103d2b);border-radius:12px}
+.account-panel{border:1px solid #e9e3d6;border-radius:11px;box-shadow:0 14px 36px #202a1a0d}
+.role-tabs{border-radius:8px;border-color:#e7e1d4}
+.role-tabs button{border-radius:5px}
+.role-tabs button.active{background:#155c3b}
+.panel-icon{background:#f5eedc;color:#76551c;border-radius:8px}
+.owner-form input,.owner-form select{border-radius:6px;background:#fff}
+.owner-form input:focus,.owner-form select:focus{border-color:#b88a37;box-shadow:0 0 0 3px #efad4320}
+.submit{border-radius:6px}
+.notice.success{background:#eaf2e8;color:#285b3b}
+.notice.error{background:#fff0e9;color:#9b3d2c}
+.reference-card{background:#f7f0df;border-color:#e8d7ae;color:#614818}
+.customer-account-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;border:1px solid #e9e3d6;border-radius:8px;background:#faf8f1;margin-bottom:17px}
+.customer-account-bar>div{display:grid;gap:4px}
+.customer-account-bar small,.customer-account-bar span{font-size:10px;color:#788176}
+.customer-account-bar small{font-weight:900;letter-spacing:1px;color:#99712c}
+.customer-account-bar strong{font-size:14px;color:#20372a}
+.customer-booking-heading{display:flex;justify-content:space-between;align-items:center;margin:20px 0 12px}
+.customer-booking-heading>div{display:grid;gap:4px}
+.customer-booking-heading b{font-size:13px;color:#23382a}
+.customer-booking-heading small{font-size:10px;color:#7b867d}
+.customer-ride{background:#fff;border-color:#e9e5da;border-radius:8px;box-shadow:none}
+.customer-ride>strong{font-size:13px;line-height:1.5}
+.customer-ride>strong span{color:#b17b24;padding:0 4px}
+.customer-ride-meta{display:flex;flex-wrap:wrap;gap:8px 13px;color:#7b867d;font-size:10px;margin:8px 0}
+.customer-fare{color:#155c3b;font-size:14px;display:block;margin:8px 0}
+.customer-empty{margin-top:12px;background:#faf8f1;border-color:#e7ddc6}
+.customer-login-form{max-width:620px}
+.password-input-wrap{position:relative;display:flex;align-items:center}
+.password-input-wrap input{padding-right:70px}
+.password-input-wrap button{position:absolute;right:10px;border:0;background:transparent;color:#176343;font-size:10px;font-weight:800;cursor:pointer}
+.password-hint{display:block;margin-top:-8px;color:#758176;font-size:10px;line-height:1.6}
+.form .password-hint{margin-top:-8px}
+@media(max-width:760px){
+ .hero{padding-top:36px;padding-bottom:48px}
+ .hero h1{font-size:clamp(42px,11vw,52px);letter-spacing:-2px}
+ .account-aside{background:linear-gradient(150deg,#1b6041,#103d2b)}
+ .customer-account-bar{align-items:flex-start}
+ .customer-ride-meta{gap:7px}
+}

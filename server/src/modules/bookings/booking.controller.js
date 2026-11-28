@@ -1,5 +1,6 @@
 import { createBookingSchema } from './booking.schema.js';
 import { createPublicBooking } from './booking.service.js';
+import { getOrCreateCustomer, issueCustomerSession } from '../customers/customer.service.js';
 
 export async function postBooking(req, res, next) {
   const parsed = createBookingSchema.safeParse(req.body);
@@ -11,8 +12,10 @@ export async function postBooking(req, res, next) {
   }
 
   try {
-    const result = await createPublicBooking(parsed.data);
-    return res.status(201).json({ ok: true, ...result });
+    const customer = await getOrCreateCustomer(parsed.data);
+    const result = await createPublicBooking(parsed.data, customer.id);
+    const session = await issueCustomerSession(customer.id);
+    return res.status(201).json({ ok: true, ...result, token: session.token, expiresAt: session.expiresAt, customer: { name: customer.full_name, phone: customer.phone } });
   } catch (error) {
     return next(error);
   }

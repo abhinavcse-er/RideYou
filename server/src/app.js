@@ -6,6 +6,7 @@ import { isDatabaseConfigured } from './config/supabase.js';
 import bookingRoutes from './modules/bookings/booking.routes.js';
 import bookingAcceptRoutes from './modules/bookings/booking.accept.js';
 import authRoutes from './modules/auth/auth.routes.js';
+import customerRoutes from './modules/customers/customer.routes.js';
 import adminRoutes from './modules/admin/admin.routes.js';
 import ownerRoutes from './modules/owners/owner.routes.js';
 import vehicleRoutes from './modules/vehicles/vehicle.routes.js';
@@ -31,6 +32,7 @@ app.get('/api/health', (_req, res) => res.json({
   environment: env.nodeEnv,
 }));
 app.use('/api/auth', authRoutes);
+app.use('/api/customers', customerRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/owners', ownerRoutes);
 app.use('/api/vehicles', vehicleRoutes);
