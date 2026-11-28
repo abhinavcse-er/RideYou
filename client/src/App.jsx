@@ -12,10 +12,10 @@ export default function App() {
  return <main className="app-shell">
   <SiteHeader health={ride.health}/>
   <HeroSection/>
-  <VehicleSection vehicles={ride.vehicles} loading={ride.loading} error={ride.error} selected={ride.selected} onSelect={id=>{ride.setSelected(id);}}/>
+  <VehicleSection vehicles={ride.vehicles} loading={ride.loading} error={ride.error} selected={ride.selected} onSelect={id=>ride.setSelected(id)}/>
   <BookingSection booking={ride.booking} setBooking={ride.setBooking} chosen={ride.chosen} submitBooking={ride.submitBooking} error={ride.error} notice={ride.notice} reference={ride.reference} selected={ride.selected} submitting={ride.submitting}/>
   <HowItWorks/>
-  <AccountSection workspace={ride.workspace} setWorkspace={ride.setWorkspace} reference={ride.reference} setReference={ride.setReference} lookupPhone={ride.lookupPhone} setLookupPhone={ride.setLookupPhone} checkBooking={ride.checkBooking} statusResult={ride.statusResult} session={ride.session} authClient={ride.authClient} authStep={ride.authStep} sendOtp={ride.sendOtp} verifyOtp={ride.verifyOtp} otpPhone={ride.otpPhone} setOtpPhone={ride.setOtpPhone} otp={ride.otp} setOtp={ride.setOtp} error={ride.error} authBusy={ride.authBusy} ownerData={ride.ownerData} ownerVehicles={ride.ownerVehicles} vehicleForm={ride.vehicleForm} setVehicleForm={ride.setVehicleForm} addVehicle={ride.addVehicle}/>
+  <AccountSection {...ride}/>
   <SiteFooter/>
  </main>;
 }
