@@ -45,7 +45,8 @@ router.post('/register',registrationLimiter,async(req,res,next)=>{
   if(profile&&profile.role!=='owner')return res.status(409).json({error:'Ye email kisi doosre RideYou account role se linked hai.'});
   if(!profile){
    const {error}=await supabase.from('profiles').insert({id:userData.user.id,full_name:parsed.data.fullName,phone:parsed.data.phone,role:'owner'});
-   if(error&&error.code!=='23505')throw error;
+   if(error?.code==='23505')return res.status(409).json({error:'Ye mobile number pehle se RideYou account se linked hai.'});
+      if(error)throw error;
   }
   let owner=await getOwner(userData.user.id);
   if(!owner){
