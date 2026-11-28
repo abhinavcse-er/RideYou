@@ -3,6 +3,7 @@ import { z } from 'zod';
 import rateLimit from 'express-rate-limit';
 import { requireAuth, requireRole } from '../../middleware/auth.js';
 import { supabase } from '../../config/supabase.js';
+import { isFourWheelerClass } from './admin.policy.js';
 
 const router = Router();
 router.use(rateLimit({windowMs:15*60*1000,limit:120,standardHeaders:'draft-7',legacyHeaders:false}));
@@ -105,7 +106,7 @@ router.patch('/owners/:id/verification',async(req,res,next)=>{
 router.patch('/vehicles/:id/approval',async(req,res,next)=>{
   try{
     if(!uuid.safeParse(req.params.id).success)return res.status(400).json({error:'Invalid vehicle id.'});
-    const parsed=z.object({status:z.enum(['active','inactive','rejected','maintenance']),vehicleClass:z.enum(['hatchback','sedan','suv','muv','van','luxury']).optional()}).safeParse(req.body);
+    const parsed=z.object({status:z.enum(['active','inactive','rejected','maintenance']),vehicleClass:z.string().refine(isFourWheelerClass).optional()}).safeParse(req.body);
     if(!parsed.success||(parsed.data.status==='active'&&!parsed.data.vehicleClass))return res.status(400).json({error:'Active vehicles require an approved four-wheeler class.'});
     const {data,error}=await supabase.from('vehicles').update({status:parsed.data.status,vehicle_class:parsed.data.vehicleClass??null})
       .eq('id',req.params.id).select('id,status,vehicle_class').maybeSingle();
