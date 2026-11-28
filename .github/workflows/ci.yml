@@ -16,6 +16,8 @@ jobs:
           node-version: 20
       - name: Install workspaces
         run: npm install
+      - name: Check server JavaScript syntax
+        run: find server -name '*.js' -print0 | xargs -0 -n1 node --check
       - name: Run server policy tests
         run: npm test
       - name: Build responsive web app
