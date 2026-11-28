@@ -12,7 +12,27 @@ export default function useRideYou() {
  const [adminData,setAdminData]=useState(null),[adminLoading,setAdminLoading]=useState(false),[adminError,setAdminError]=useState(''),[adminBusy,setAdminBusy]=useState(false);
  const chosen=useMemo(()=>vehicles.find(v=>v.id===selected),[vehicles,selected]),token=session?.access_token;
  async function loadVehicles(){try{const data=await api('/api/vehicles');setVehicles(data.vehicles||[]);setError('');}catch(e){setError(e.message);}finally{setLoading(false);}}
- useEffect(()=>{loadVehicles();api('/api/health').then(()=>setHealth('online')).catch(()=>setHealth('offline'));if(authClient){authClient.auth.getSession().then(({data})=>setSession(data.session));const {data:{subscription}}=authClient.auth.onAuthStateChange((_event,next)=>setSession(next));return()=>subscription.unsubscribe();}},[]);
+ useEffect(()=>{
+  let active=true, checking=false, vehiclesLoaded=false;
+  const checkHealth=async()=>{
+   if(checking)return;
+   checking=true;
+   try{
+    await api('/api/health');
+    if(!active)return;
+    setHealth('online');
+    if(!vehiclesLoaded){vehiclesLoaded=true;await loadVehicles();}
+   }catch{
+    if(active)setHealth('offline');
+   }finally{checking=false;}
+  };
+  checkHealth();
+  // Render free instances can sleep; keep retrying so a cold start does not
+  // leave the header permanently stuck on SERVICE OFFLINE.
+  const healthTimer=setInterval(checkHealth,20000);
+  if(authClient){authClient.auth.getSession().then(({data})=>{if(active)setSession(data.session);});const {data:{subscription}}=authClient.auth.onAuthStateChange((_event,next)=>setSession(next));return()=>{active=false;clearInterval(healthTimer);subscription.unsubscribe();};}
+  return()=>{active=false;clearInterval(healthTimer);};
+ },[]);
  useEffect(()=>{if(!token){setOwnerData(null);setOwnerVehicles([]);setAdminData(null);return;}if(workspace==='owner'){Promise.all([api('/api/owners/me',{},token),api('/api/owners/vehicles',{},token)]).then(([owner,items])=>{setOwnerData(owner.owner);setOwnerVehicles(items.vehicles||[]);setError('');}).catch(e=>setError(e.message));}if(workspace==='admin'){refreshAdmin();}},[token,workspace]);
  useEffect(()=>{if(workspace!=='admin'||!token)return;const timer=setInterval(()=>refreshAdmin(),30000);return()=>clearInterval(timer);},[workspace,token]);
  useEffect(()=>{if(workspace!=='customer'||!statusResult?.reference||!reference||!lookupPhone)return;let active=true;const poll=async()=>{try{const data=await api('/api/bookings/'+encodeURIComponent(reference.trim())+'?phone='+encodeURIComponent(lookupPhone));if(active)setStatusResult(data.booking);}catch{}};const timer=setInterval(poll,20000);return()=>{active=false;clearInterval(timer);};},[workspace,statusResult?.reference,reference,lookupPhone]);
