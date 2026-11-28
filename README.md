@@ -1,6 +1,6 @@
 # RideYou — Bihar ride booking platform
 
-RideYou connects customers with approved local vehicle owners through a simple booking workflow. Customers request a vehicle; the RideYou Booking Team checks availability and confirms the fare before a trip is accepted.
+RideYou connects customers with approved local vehicle owners through a simple booking workflow. Customers request a vehicle; a RideYou Admin checks availability and confirms the fare before a trip is accepted.
 
 ## Website
 
@@ -13,7 +13,7 @@ The frontend is API-driven. Booking requests and vehicle listings are fetched fr
 - **Frontend:** React + Vite, deployed as a static website.
 - **API:** Node.js + Express, modular routes and services.
 - **Database and authentication:** Supabase PostgreSQL and Supabase Auth.
-- **Roles:** customer, vehicle owner, driver, and two invite-only Booking Team accounts.
+- **Roles:** customer, vehicle owner, driver, and two invite-only Admin accounts.
 - **Security:** server-side role checks; Supabase service-role key stays on the server.
 
 ## Environment
@@ -47,12 +47,12 @@ npm run dev
 - Booking reference + phone based private status lookup.
 - Supabase SMS OTP sign-in for pre-provisioned vehicle-owner accounts.
 - Owner vehicle registration endpoint; owner must be verified before listing.
-- Separate API modules for bookings, owners, vehicles, authentication and Booking Team identity.
+- Separate API modules for bookings, owners, vehicles, authentication and Admin identity.
 
 ## Remaining launch requirements
 
 Before accepting real public bookings, finish and verify:
-1. Booking Team queue, fare quote, customer acceptance, cancellation and audit trail.
+1. Admin booking queue, fare quote, customer acceptance, cancellation and audit trail.
 2. Driver registration and private driver assignment.
 3. Secure vehicle/driver photo upload using Supabase Storage.
 4. Database transaction/RPC for conflict-safe assignment and complete RLS/security review.
