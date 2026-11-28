@@ -2,7 +2,7 @@ export default function HowItWorks() {
   const steps = [
     ['01','Gaadi chuniye','Apne safar ke hisaab se available vehicle dekhein.'],
     ['02','Booking request bhejein','Pickup, destination aur travel details fill karein.'],
-    ['03','Booking Team confirm karegi','Booking Manager ya Booking Sahayak owner se availability aur fare check karenge.'],
+    ['03','Booking Team confirm karegi','Admin owner se availability aur fare check karega.'],
     ['04','Fare accept karein','Aapki manzoori ke baad booking confirm hogi.'],
     ['05','Aaram se safar karein','Confirmation ke baad trip ki zaroori details milengi.'],
   ];
