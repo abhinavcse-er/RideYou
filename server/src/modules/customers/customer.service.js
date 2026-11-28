@@ -1,4 +1,3 @@
-import { randomBytes } from 'node:crypto';
 import { supabase } from '../../config/supabase.js';
 import { hashPassword,verifyPassword,createSessionToken,hashSessionToken } from './customer.password.js';
 function unavailable(){const e=new Error('Customer account service abhi available nahi hai.');e.status=503;return e;}
