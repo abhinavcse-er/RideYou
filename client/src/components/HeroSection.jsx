@@ -2,7 +2,7 @@ export default function HeroSection() {
   return <section className="hero wrap">
     <div className="hero-copy"><div className="eyebrow"><i/> BIHAR KI APNI RIDE SERVICE</div>
       <h1>Safar ab hoga<br/><em>aur bhi aasaan.</em></h1>
-      <p className="intro">Apni pasand ki gaadi chuniye, pickup aur destination batayein. Booking Team availability aur fare confirm karegi.</p>
+      <p className="intro">Apni pasand ki gaadi chuniye, pickup aur destination batayein. Admin availability aur fare confirm karega.</p>
       <a className="cta" href="#vehicles">Ride book karein <b>→</b></a>
       <p className="assure">✓ Booking confirm hone se pehle koi payment nahi</p>
     </div>
