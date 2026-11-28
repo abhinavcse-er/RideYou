@@ -14,7 +14,7 @@ const updateSchema = z.object({
 
 async function requireActiveAdmin(req, res) {
   const { data, error } = await supabase
-    .from('mediators')
+    .from('admins')
     .select('id, display_name, active')
     .eq('profile_id', req.user.id)
     .maybeSingle();
