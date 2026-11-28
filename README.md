@@ -51,8 +51,9 @@ Run these SQL files in Supabase SQL Editor in this exact order, after the existi
 
 1. supabase/migrations/20261128_01_admin_role.sql
 2. supabase/migrations/20261128_02_admin_operations.sql
+3. supabase/migrations/20261128_03_atomic_booking_operations.sql
 
-The first migration renames the legacy mediator enum value to admin, renames mediators to admins, and renames the booking foreign key. The second adds four-wheeler classification and customer quote acceptance fields. Existing active vehicles without an explicit four-wheeler class are made inactive until Admin verifies them.
+The first migration renames the legacy mediator enum value to admin, renames mediators to admins, and renames the booking foreign key. The second adds four-wheeler classification and customer quote acceptance fields. The third installs atomic database operations so each quote, customer acceptance, assignment and trip status update is committed together with its audit event. Existing active vehicles without an explicit four-wheeler class are made inactive until Admin verifies them.
 
 Before enabling Admin access, confirm the two intended profiles have the admin role and active rows in public.admins. Keep the existing display names Booking Manager and Booking Sahayak if those are the intended two operators.
 
