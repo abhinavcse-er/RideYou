@@ -386,3 +386,7 @@ h1,h2,h3,h4,strong,.logo{font-family:'Manrope','DM Sans',sans-serif}
  .footer-links{order:2;width:100%;padding:8px 0 2px}
  .footer>small{order:4}
 }
+
+.top-help-link{display:inline-flex;align-items:center;justify-content:center;padding:11px 12px;border:1px solid #3f5c48;border-radius:6px;color:#d9e7d8;text-decoration:none;font-size:10px;font-weight:800;transition:background .18s,border .18s}
+.top-help-link:hover{background:#1b3323;border-color:#679072;color:var(--amber)}
+@media(max-width:760px){.top-help-link{padding:10px 9px;font-size:9px}.top-actions{gap:7px}}
