@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "scripts": { "dev": "node --watch index.js", "start": "node index.js" },
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "test": "node --test"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.47.10",
     "cors": "^2.8.5",

@@ -17,12 +17,12 @@ export async function createPublicBooking(data) {
 
   const { data: vehicle, error: vehicleError } = await supabase
     .from('vehicles')
-    .select('id, seats, status')
+    .select('id, seats, status, vehicle_class')
     .eq('id', data.vehicleId)
     .eq('status', 'active')
     .maybeSingle();
   if (vehicleError) throw vehicleError;
-  if (!vehicle || vehicle.seats < data.passengers) {
+  if (!vehicle || !['hatchback','sedan','suv','muv','van','luxury'].includes(vehicle.vehicle_class) || vehicle.seats < data.passengers) {
     const error = new Error('Selected gaadi ab available nahi hai ya passenger capacity kam hai.');
     error.status = 409;
     throw error;
