@@ -25,6 +25,9 @@ create index if not exists bookings_customer_phone_reference_idx on public.booki
 create or replace function public.guard_four_wheeler_vehicle()
 returns trigger language plpgsql as $$
 begin
+  if new.seats < 4 then
+    raise exception 'RideYou only accepts four-wheelers with at least four seats';
+  end if;
   if new.status = 'active' and new.vehicle_class is null then
     raise exception 'Vehicle class must be verified before activation';
   end if;
