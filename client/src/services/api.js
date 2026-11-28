@@ -1,4 +1,7 @@
-const API = import.meta.env.VITE_API_URL || '';
+// GitHub Pages and Render are hosted on different origins. Keep a production
+// fallback so the public site still reaches the API when the Actions variable
+// VITE_API_URL has not been configured.
+const API = (import.meta.env.VITE_API_URL || 'https://rideyou.onrender.com').replace(/\/$/, '');
 
 export async function api(path, options = {}, token) {
   const response = await fetch(API + path, {
