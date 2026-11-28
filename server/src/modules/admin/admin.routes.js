@@ -86,6 +86,7 @@ router.patch('/bookings/:id/assign', async(req,res,next)=>{
     if(!vehicle.data || !isFourWheelerClass(vehicle.data.vehicle_class)) return res.status(400).json({error:'Only verified four-wheelers can be assigned.'});
     if(vehicle.data.seats<before.passengers) return res.status(400).json({error:'Vehicle passenger capacity is too small.'});
     if(!driver.data) return res.status(400).json({error:'Driver is not verified or active.'});
+    if(driver.data.owner_id!==vehicle.data.owner_id) return res.status(400).json({error:'Assigned driver must belong to the selected vehicle owner.'});
     const {data,error}=await supabase.from('bookings').update({
       vehicle_id:parsed.data.vehicleId,driver_id:parsed.data.driverId,ride_end_at:end.toISOString(),
       status:'assigned',admin_id:req.admin.id,
@@ -141,6 +142,9 @@ router.post('/drivers',async(req,res,next)=>{
   try{
     const parsed=z.object({ownerId:uuid,fullName:z.string().trim().min(2).max(100),phone:z.string().regex(/^[6-9][0-9]{9}$/)}).safeParse(req.body);
     if(!parsed.success) return res.status(400).json({error:'Owner, driver name and valid mobile number are required.'});
+    const {data:owner,error:ownerError}=await supabase.from('owners').select('id,verification_status').eq('id',parsed.data.ownerId).maybeSingle();
+    if(ownerError) throw ownerError;
+    if(!owner || owner.verification_status!=='verified') return res.status(400).json({error:'Driver must be linked to a verified owner.'});
     const {data,error}=await supabase.from('drivers').insert({owner_id:parsed.data.ownerId,full_name:parsed.data.fullName,phone:parsed.data.phone,verification_status:'verified',active:true}).select('id,owner_id,full_name,phone,verification_status,active').single();
     if(error?.code==='23505') return res.status(409).json({error:'Driver already exists.'});
     if(error) throw error;
