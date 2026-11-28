@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { requireAuth, requireRole } from '../../middleware/auth.js';
 import { supabase } from '../../config/supabase.js';
+import { isFourWheelerClass, canQuoteBooking, canAssignBooking, canTransitionTrip } from './admin.policy.js';
 
 const router = Router();
 router.use(requireAuth, requireRole('admin'));
@@ -57,7 +58,7 @@ router.patch('/bookings/:id/quote', async (req,res,next) => {
     const {data:before,error:readError}=await supabase.from('bookings').select('id,status').eq('id',req.params.id).maybeSingle();
     if(readError) throw readError;
     if(!before) return res.status(404).json({error:'Booking not found.'});
-    if(before.status!=='requested') return res.status(409).json({error:'Only new requests can receive a fare quote.'});
+    if(!canQuoteBooking(before.status)) return res.status(409).json({error:'Only new requests can receive a fare quote.'});
     const {data,error}=await supabase.from('bookings').update({quoted_fare:parsed.data.fare,status:'quoted',quoted_at:new Date().toISOString(),admin_id:req.admin.id}).eq('id',req.params.id).eq('status','requested').select('id,reference,status,quoted_fare').maybeSingle();
     if(error) throw error;
     if(!data) return res.status(409).json({error:'Booking changed. Refresh and try again.'});
@@ -74,7 +75,7 @@ router.patch('/bookings/:id/assign', async(req,res,next)=>{
     const {data:before,error:readError}=await supabase.from('bookings').select('id,status,ride_at,passengers').eq('id',req.params.id).maybeSingle();
     if(readError) throw readError;
     if(!before) return res.status(404).json({error:'Booking not found.'});
-    if(before.status!=='accepted') return res.status(409).json({error:'Customer must accept the fare before assignment.'});
+    if(!canAssignBooking(before.status)) return res.status(409).json({error:'Customer must accept the fare before assignment.'});
     const end=new Date(parsed.data.rideEndAt), start=new Date(before.ride_at);
     if(end<=start) return res.status(400).json({error:'Trip end must be after pickup time.'});
     const [vehicle,driver]=await Promise.all([
@@ -82,7 +83,7 @@ router.patch('/bookings/:id/assign', async(req,res,next)=>{
       supabase.from('drivers').select('id,active,verification_status,owner_id').eq('id',parsed.data.driverId).eq('active',true).eq('verification_status','verified').maybeSingle(),
     ]);
     if(vehicle.error) throw vehicle.error; if(driver.error) throw driver.error;
-    if(!vehicle.data || !vehicle.data.vehicle_class) return res.status(400).json({error:'Only verified four-wheelers can be assigned.'});
+    if(!vehicle.data || !isFourWheelerClass(vehicle.data.vehicle_class)) return res.status(400).json({error:'Only verified four-wheelers can be assigned.'});
     if(vehicle.data.seats<before.passengers) return res.status(400).json({error:'Vehicle passenger capacity is too small.'});
     if(!driver.data) return res.status(400).json({error:'Driver is not verified or active.'});
     const {data,error}=await supabase.from('bookings').update({
@@ -105,8 +106,7 @@ router.patch('/bookings/:id/status',async(req,res,next)=>{
     const {data:before,error:readError}=await supabase.from('bookings').select('id,status').eq('id',req.params.id).maybeSingle();
     if(readError) throw readError;
     if(!before) return res.status(404).json({error:'Booking not found.'});
-    const allowed={assigned:['started','cancelled'],started:['completed','cancelled']};
-    if(!(allowed[before.status]||[]).includes(parsed.data.status)) return res.status(409).json({error:'This status transition is not allowed.'});
+    if(!canTransitionTrip(before.status,parsed.data.status)) return res.status(409).json({error:'This status transition is not allowed.'});
     const {data,error}=await supabase.from('bookings').update({status:parsed.data.status,cancellation_reason:parsed.data.status==='cancelled'?parsed.data.note:null,admin_id:req.admin.id}).eq('id',req.params.id).eq('status',before.status).select('id,reference,status').maybeSingle();
     if(error) throw error;
     if(!data) return res.status(409).json({error:'Booking changed. Refresh and try again.'});
