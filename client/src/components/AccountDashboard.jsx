@@ -13,7 +13,7 @@ export default function AccountDashboard(props){
   const active=roles.find(role=>role.id===workspace)||roles[0];
   const changeRole=(role)=>{
     setWorkspace(role);
-    setAuthStep('phone');
+    setAuthStep('email');
     setError('');
     setNotice('');
   };

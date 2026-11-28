@@ -338,3 +338,55 @@ h1,h2,h3,h4,strong,.logo{font-family:'Manrope','DM Sans',sans-serif}
  .booking-auth-gate{align-items:flex-start;flex-direction:column}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+
+/* Owner/Admin email verification and Help Centre */
+.panel-title-kicker{color:#a9b99e;font-size:9px;font-weight:800;letter-spacing:1.4px}
+.help-section{padding:86px 0 92px;background:
+ radial-gradient(ellipse at 93% 8%,rgba(56,105,66,.16),transparent 34%),
+ linear-gradient(180deg,#0d1812,#101d16)}
+.help-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:30px}
+.help-heading h2{margin:15px 0 0;color:var(--ink);font:800 clamp(38px,4.5vw,56px)/1.04 'Manrope',sans-serif;letter-spacing:-2.8px}
+.help-heading h2 em{color:var(--green);font-style:normal}
+.help-heading>p{max-width:390px;margin:0 0 5px;color:var(--muted);font-size:13px;line-height:1.8}
+.help-grid{display:grid;grid-template-columns:1fr .9fr;gap:25px;align-items:start}
+.help-faq,.help-form{min-width:0;padding:23px;border:1px solid #314a39;border-radius:11px;background:linear-gradient(150deg,#17291e,#122018);box-shadow:0 18px 45px rgba(0,0,0,.16)}
+.help-label{margin-bottom:12px;color:#d9b56b;font-size:9px;font-weight:800;letter-spacing:1.4px}
+.help-faq-item{border-top:1px solid #2c4333}
+.help-faq-item:last-child{border-bottom:1px solid #2c4333}
+.help-faq-item summary{display:grid;grid-template-columns:32px 1fr 20px;gap:10px;align-items:center;list-style:none;padding:16px 0;color:#e6eee4;font:700 12px 'Manrope',sans-serif;cursor:pointer}
+.help-faq-item summary::-webkit-details-marker{display:none}
+.help-faq-item summary span{color:#dcb569;font-size:9px;font-weight:800}
+.help-faq-item summary b{color:#94b39a;text-align:right;font-size:15px}
+.help-faq-item[open] summary b{color:var(--amber)}
+.help-faq-item p{margin:0 0 17px 42px;color:#9fb0a1;font-size:11px;line-height:1.8}
+.help-form{display:grid;gap:13px}
+.help-form-title{padding-bottom:14px;border-bottom:1px solid #2d4434}
+.help-form-title h3{margin:7px 0;color:#eff4e9;font:800 21px 'Manrope',sans-serif}
+.help-form-title p{margin:0;color:#9eae9f;font-size:10px;line-height:1.7}
+.help-form label{display:grid;gap:7px;color:#d5e1d4;font-size:10px;font-weight:700}
+.help-form label small{color:#8da091;font-size:9px;font-weight:500}
+.help-form input,.help-form textarea{width:100%;min-width:0;padding:12px 13px;border:1px solid #3b5546;border-radius:6px;background:#0f1c15;color:#ecf2e9;font:13px 'DM Sans',sans-serif;outline:none}
+.help-form textarea{resize:vertical}
+.help-form input:focus,.help-form textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(118,200,147,.12)}
+.help-form input::placeholder,.help-form textarea::placeholder{color:#718377}
+.footer{flex-wrap:wrap}
+.footer-links{display:flex;gap:17px}
+.footer-links a{color:#a7b7aa;text-decoration:none;font-size:10px;font-weight:700}
+.footer-links a:hover{color:var(--amber)}
+@media(max-width:800px){
+ .help-section{padding:58px 0}
+ .help-heading{display:block;margin-bottom:22px}
+ .help-heading h2{font-size:42px}
+ .help-heading>p{margin-top:12px}
+ .help-grid{grid-template-columns:1fr;gap:14px}
+ .help-faq,.help-form{padding:18px}
+}
+@media(max-width:760px){
+ .footer-links{order:2;width:100%;padding:8px 0 2px}
+ .footer>small{order:4}
+}
+
+.top-help-link{display:inline-flex;align-items:center;justify-content:center;padding:11px 12px;border:1px solid #3f5c48;border-radius:6px;color:#d9e7d8;text-decoration:none;font-size:10px;font-weight:800;transition:background .18s,border .18s}
+.top-help-link:hover{background:#1b3323;border-color:#679072;color:var(--amber)}
+@media(max-width:760px){.top-help-link{padding:10px 9px;font-size:9px}.top-actions{gap:7px}}
