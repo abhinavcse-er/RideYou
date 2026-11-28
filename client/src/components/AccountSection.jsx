@@ -1,5 +1,6 @@
 import { money, formatDate } from '../utils/format.js';
 import AdminDashboard from './AdminDashboard.jsx';
+import CustomerPortal from './customer/CustomerPortal.jsx';
 
 export default function AccountSection(props) {
  const {workspace,setWorkspace,reference,setReference,lookupPhone,setLookupPhone,checkBooking,acceptQuote,statusResult,session,authClient,authStep,sendOtp,verifyOtp,otpPhone,setOtpPhone,otp,setOtp,error,notice,authBusy,ownerData,ownerVehicles,vehicleForm,setVehicleForm,addVehicle,adminData,adminLoading,adminError,adminBusy,refreshAdmin,quoteBooking,assignBooking,updateTripStatus,verifyOwner,approveVehicle,addDriver}=props;
@@ -26,17 +27,7 @@ export default function AccountSection(props) {
       <button role="tab" aria-selected={workspace==='owner'} className={workspace==='owner'?'active':''} onClick={()=>setWorkspace('owner')}>Vehicle Owner</button>
       <button role="tab" aria-selected={workspace==='admin'} className={workspace==='admin'?'active':''} onClick={()=>setWorkspace('admin')}>Admin</button>
      </div>
-     {workspace==='customer'&&<div className="account-panel">
-      <div className="panel-title"><div><span className="panel-kicker">CUSTOMER PORTAL</span><h3>Track your booking</h3><p>Apna booking reference aur registered mobile number enter karein.</p></div><span className="panel-icon">↗</span></div>
-      <form className="owner-form lookup-form" onSubmit={checkBooking}>
-       <label>Booking reference<input value={reference} onChange={e=>setReference(e.target.value.toUpperCase())} required placeholder="RY-XXXXXXXX"/></label>
-       <label>Registered mobile number<input value={lookupPhone} onChange={e=>setLookupPhone(e.target.value.replace(/\D/g,'').slice(0,10))} required pattern="[6-9][0-9]{9}" placeholder="10-digit mobile number" inputMode="numeric"/></label>
-       {error&&<div className="notice error lookup-message">{error}</div>}
-       <button className="submit" type="submit">Find my booking <span>↗</span></button>
-      </form>
-      {statusResult&&<article className="ride-card"><div className="ride-card-head"><span className="panel-kicker">BOOKING DETAILS</span><span className="ride-status">{statusResult.status}</span></div><strong>{statusResult.reference}</strong><p>{statusResult.pickup} → {statusResult.destination}</p><small>{formatDate(statusResult.ride_at)} · Status refreshes every 20 seconds</small><p className="assigned">Status: {statusResult.status}</p>{statusResult.quoted_fare!=null&&<><strong>{money(statusResult.quoted_fare)}</strong>{statusResult.status==='quoted'&&<button className="mini primary" type="button" onClick={acceptQuote}>Accept fare & confirm</button>}</>}{statusResult.vehicles&&<p className="assigned">Vehicle: {statusResult.vehicles.vehicle_name} · {statusResult.vehicles.registration_number}</p>}{statusResult.drivers&&<p className="assigned">Driver: {statusResult.drivers.full_name}</p>}</article>}
-      <p className="account-helper">Booking reference aapko request submit karne ke baad milta hai. Isse apne paas safe rakhein.</p>
-     </div>}
+     {workspace==='customer'&&<CustomerPortal {...props}/>}
      {workspace==='owner'&&<div className="account-panel">
       <div className="panel-title"><div><span className="panel-kicker">PARTNER PORTAL</span><h3>Vehicle Owner Login</h3><p>Registered mobile number par secure OTP se login karein.</p></div><span className="panel-icon">⌁</span></div>
       {!session?<form className="owner-form" onSubmit={authStep==='phone'?sendOtp:verifyOtp}><label>Registered mobile number<input value={otpPhone} onChange={e=>setOtpPhone(e.target.value)} required placeholder="+91 XXXXX XXXXX"/></label>{authStep==='otp'&&<label>SMS OTP<input value={otp} onChange={e=>setOtp(e.target.value.replace(/\D/g,'').slice(0,6))} required inputMode="numeric" placeholder="6-digit OTP"/></label>}{error&&<div className="notice error">{error}</div>}{notice&&<div className="notice success">{notice}</div>}<button className="submit" disabled={authBusy}>{authBusy?'Please wait…':authStep==='phone'?'Send OTP':'Verify OTP'} <span>↗</span></button>{!authClient&&<small className="privacy">Supabase public URL aur anon key configure hone par Owner login activate hoga.</small>}</form>
