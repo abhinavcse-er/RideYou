@@ -5,6 +5,7 @@ import HowItWorks from './components/HowItWorks.jsx';
 import VehicleSection from './components/VehicleSection.jsx';
 import BookingSection from './components/BookingSection.jsx';
 import AccountSection from './components/AccountSection.jsx';
+import HelpSection from './components/HelpSection.jsx';
 import useRideYou from './hooks/useRideYou.js';
 
 export default function App(){
@@ -16,6 +17,7 @@ export default function App(){
   <BookingSection booking={ride.booking} setBooking={ride.setBooking} chosen={ride.chosen} submitBooking={ride.submitBooking} error={ride.error} notice={ride.notice} reference={ride.reference} selected={ride.selected} submitting={ride.submitting} customerToken={ride.customerToken} customerUser={ride.customerUser}/>
   <HowItWorks/>
   <AccountSection {...ride}/>
+  <HelpSection submitSupportRequest={ride.submitSupportRequest}/>
   <SiteFooter/>
  </main>;
 }
