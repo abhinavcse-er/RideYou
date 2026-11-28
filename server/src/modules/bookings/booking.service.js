@@ -1,7 +1,7 @@
 import { randomBytes } from 'node:crypto';
 import { supabase } from '../../config/supabase.js';
 
-export async function createPublicBooking(data) {
+export async function createPublicBooking(data, customerAccountId) {
   if (!supabase) {
     const error = new Error('Booking service is not configured.');
     error.status = 503;
@@ -34,6 +34,7 @@ export async function createPublicBooking(data) {
     vehicle_id: data.vehicleId,
     customer_name: data.name,
     customer_phone: data.phone,
+    customer_account_id: customerAccountId,
     pickup: data.pickup,
     destination: data.destination,
     ride_at: rideAt.toISOString(),
