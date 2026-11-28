@@ -1,7 +1,7 @@
 -- RideYou: promote the two existing Booking Team identities to the Admin role.
 -- Run in Supabase SQL Editor after confirming the two rows in public.mediators.
--- This migration preserves the existing mediators identity table as an internal
--- mapping table; the public-facing and authorization role is now "admin".
+-- Rename the existing identity table so the Admin role is consistent end to end.
+alter table if exists public.mediators rename to admins;
 
 do $$
 declare constraint_row record;
@@ -32,5 +32,5 @@ alter table public.profiles
 -- Verify exactly two rows and set their display names/active flags separately
 -- if your existing records differ.
 select profile_id, display_name, active
-from public.mediators
+from public.admins
 order by display_name;
