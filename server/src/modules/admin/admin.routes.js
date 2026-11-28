@@ -130,9 +130,9 @@ router.patch('/owners/:id/verification',async(req,res,next)=>{
 router.patch('/vehicles/:id/approval',async(req,res,next)=>{
   try{
     if(!uuid.safeParse(req.params.id).success) return res.status(400).json({error:'Invalid vehicle id.'});
-    const parsed=z.object({status:z.enum(['active','inactive','rejected','maintenance']),vehicleClass:z.enum(['hatchback','sedan','suv','muv','van','luxury'])}).safeParse(req.body);
-    if(!parsed.success) return res.status(400).json({error:'Vehicle class and status are required.'});
-    const {data,error}=await supabase.from('vehicles').update({status:parsed.data.status,vehicle_class:parsed.data.vehicleClass}).eq('id',req.params.id).select('id,status,vehicle_class').maybeSingle();
+    const parsed=z.object({status:z.enum(['active','inactive','rejected','maintenance']),vehicleClass:z.enum(['hatchback','sedan','suv','muv','van','luxury']).optional()}).safeParse(req.body);
+    if(!parsed.success || (parsed.data.status==='active'&&!parsed.data.vehicleClass)) return res.status(400).json({error:'Active vehicles require an approved four-wheeler class.'});
+    const {data,error}=await supabase.from('vehicles').update({status:parsed.data.status,vehicle_class:parsed.data.vehicleClass??null}).eq('id',req.params.id).select('id,status,vehicle_class').maybeSingle();
     if(error) throw error; if(!data) return res.status(404).json({error:'Vehicle not found.'});
     return res.json({ok:true,vehicle:data});
   }catch(error){return next(error);}
