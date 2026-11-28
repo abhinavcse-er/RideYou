@@ -94,7 +94,13 @@ export default function useRideYou(){
   setAuthBusy(true);setError('');setNotice('');
   try{
    const shouldCreateUser=workspace==='owner'&&ownerMode==='register';
-   const {error:e}=await authClient.auth.signInWithOtp({email,options:{shouldCreateUser}});
+   // GitHub Pages serves the app from /RideYou/, not from the domain root.
+   // Explicitly return email confirmations to the deployed app path.
+   const emailRedirectTo=new URL(import.meta.env.BASE_URL||'/',window.location.origin).toString();
+   const {error:e}=await authClient.auth.signInWithOtp({
+    email,
+    options:{shouldCreateUser,emailRedirectTo},
+   });
    if(e)throw e;
    setAuthEmail(email);setAuthStep('otp');setNotice('Email par verification code bhej diya gaya hai. Inbox aur spam folder check karein.');
   }catch(e){setError(e.message);}finally{setAuthBusy(false);}
