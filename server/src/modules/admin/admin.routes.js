@@ -5,6 +5,7 @@ import { supabase } from '../../config/supabase.js';
 
 const router = Router();
 router.use(requireAuth, requireRole('admin'));
+router.use(async (req,res,next)=>{ try { const {data,error}=await supabase.from('admins').select('id,display_name,active').eq('profile_id',req.user.id).maybeSingle(); if(error) throw error; if(!data?.active) return res.status(403).json({error:'Admin access is not active.'}); req.admin=data; return next(); } catch(error){ return next(error); } });
 
 const uuid = z.string().uuid();
 const quoteSchema = z.object({ fare: z.coerce.number().finite().min(0).max(1000000) });
@@ -26,15 +27,7 @@ async function audit(booking, actorId, status, note='') {
   if (error) throw error;
 }
 
-router.get('/me', async (req, res, next) => {
-  try {
-    const { data, error } = await supabase.from('admins')
-      .select('id, display_name, active').eq('profile_id', req.user.id).maybeSingle();
-    if (error) throw error;
-    if (!data?.active) return res.status(403).json({ error: 'Admin access is not active.' });
-    return res.json({ ok: true, admin: data });
-  } catch (error) { return next(error); }
-});
+router.get('/me', (req,res) => res.json({ok:true,admin:req.admin}));
 
 router.get('/dashboard', async (_req, res, next) => {
   try {
@@ -65,7 +58,7 @@ router.patch('/bookings/:id/quote', async (req,res,next) => {
     if(readError) throw readError;
     if(!before) return res.status(404).json({error:'Booking not found.'});
     if(before.status!=='requested') return res.status(409).json({error:'Only new requests can receive a fare quote.'});
-    const {data,error}=await supabase.from('bookings').update({quoted_fare:parsed.data.fare,status:'quoted',quoted_at:new Date().toISOString(),admin_id:req.user.id}).eq('id',req.params.id).eq('status','requested').select('id,reference,status,quoted_fare').maybeSingle();
+    const {data,error}=await supabase.from('bookings').update({quoted_fare:parsed.data.fare,status:'quoted',quoted_at:new Date().toISOString(),admin_id:req.admin.id}).eq('id',req.params.id).eq('status','requested').select('id,reference,status,quoted_fare').maybeSingle();
     if(error) throw error;
     if(!data) return res.status(409).json({error:'Booking changed. Refresh and try again.'});
     await audit({...before,status:'requested'},req.user.id,'quoted','Fare quoted: '+parsed.data.fare);
@@ -94,7 +87,7 @@ router.patch('/bookings/:id/assign', async(req,res,next)=>{
     if(!driver.data) return res.status(400).json({error:'Driver is not verified or active.'});
     const {data,error}=await supabase.from('bookings').update({
       vehicle_id:parsed.data.vehicleId,driver_id:parsed.data.driverId,ride_end_at:end.toISOString(),
-      status:'assigned',admin_id:req.user.id,
+      status:'assigned',admin_id:req.admin.id,
     }).eq('id',req.params.id).eq('status','accepted').select('id,reference,status,vehicle_id,driver_id,ride_end_at').maybeSingle();
     if(error?.code==='23P01') return res.status(409).json({error:'Vehicle or driver already has an overlapping trip.'});
     if(error) throw error;
@@ -114,7 +107,7 @@ router.patch('/bookings/:id/status',async(req,res,next)=>{
     if(!before) return res.status(404).json({error:'Booking not found.'});
     const allowed={assigned:['started','cancelled'],started:['completed','cancelled']};
     if(!(allowed[before.status]||[]).includes(parsed.data.status)) return res.status(409).json({error:'This status transition is not allowed.'});
-    const {data,error}=await supabase.from('bookings').update({status:parsed.data.status,cancellation_reason:parsed.data.status==='cancelled'?parsed.data.note:null,admin_id:req.user.id}).eq('id',req.params.id).eq('status',before.status).select('id,reference,status').maybeSingle();
+    const {data,error}=await supabase.from('bookings').update({status:parsed.data.status,cancellation_reason:parsed.data.status==='cancelled'?parsed.data.note:null,admin_id:req.admin.id}).eq('id',req.params.id).eq('status',before.status).select('id,reference,status').maybeSingle();
     if(error) throw error;
     if(!data) return res.status(409).json({error:'Booking changed. Refresh and try again.'});
     await audit(before,req.user.id,parsed.data.status,parsed.data.note);
