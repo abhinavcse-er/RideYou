@@ -7,7 +7,7 @@ export default function HowItWorks() {
     ['05','Aaram se safar karein','Confirmation ke baad trip ki zaroori details milengi.'],
   ];
   return <section className="journey-section" id="how"><div className="wrap">
-    <div className="journey-head"><div><div className="eyebrow"><i/> HOW RIDEYOU WORKS</div><h2>Booking ka simple<br/><em>process.</em></h2></div><p>Customer ke liye simple booking. Vehicle owner aur customer ke beech coordination Booking Team karti hai.</p></div>
+    <div className="journey-head"><div><div className="eyebrow"><i/> HOW RIDEYOU WORKS</div><h2>Booking ka simple<br/><em>process.</em></h2></div><p>Customer ke liye simple booking. Vehicle owner aur customer ke beech coordination Admin karta hai.</p></div>
     <div className="journey-steps">{steps.map(([number,title,description])=><article key={number}><span>{number}</span><b>{title}</b><p>{description}</p></article>)}</div>
   </div></section>;
 }
