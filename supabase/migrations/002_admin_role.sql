@@ -1,5 +1,5 @@
--- RideYou: promote the two existing Booking Team identities to the Admin role.
--- Run in Supabase SQL Editor after confirming the two rows in public.mediators.
+-- RideYou: promote the two existing Admin identities to the Admin role.
+-- Run in Supabase SQL Editor after verifying the two expected Admin records in public.admins.
 -- Rename the existing identity table so the Admin role is consistent end to end.
 alter table if exists public.mediators rename to admins;
 
@@ -28,9 +28,16 @@ alter table public.profiles
   add constraint profiles_role_check
   check (role in ('customer', 'owner', 'driver', 'admin'));
 
--- The two Admin accounts must already have active identity rows.
--- Verify exactly two rows and set their display names/active flags separately
--- if your existing records differ.
+-- Keep the two agreed Admin identities active and use consistent display names.
+update public.admins
+set display_name = case lower(trim(display_name))
+  when 'sujjet kumar' then 'Sujjet Kumar'
+  when 'md kaif' then 'MD Kaif'
+  else display_name
+end,
+active = true
+where lower(trim(display_name)) in ('sujjet kumar', 'md kaif');
+
 select profile_id, display_name, active
 from public.admins
 order by display_name;
