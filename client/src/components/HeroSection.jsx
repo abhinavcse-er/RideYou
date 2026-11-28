@@ -15,10 +15,10 @@ export default function HeroSection() {
       </div>
     </div>
     <div className="hero-visual">
-      <img className="hero-image" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=85" alt="Premium car ready for a journey" fetchPriority="high"/>
+      <img className="hero-image" src="https://imgd-ct.aeplcdn.com/1056x660/n/cw/ec/109237/toyota-innova-crysta-left-front-three-quarter5.jpeg?isig=0&q=80&wm=0" alt="White Toyota Innova Crysta, a spacious Indian family and outstation MPV" fetchPriority="high"/>
       <div className="hero-visual-shade"/>
       <div className="hero-photo-top"><span className="hero-live-dot"/> LOCAL & OUTSTATION RIDES</div>
-      <div className="photo-caption"><span>YOUR JOURNEY, OUR PRIORITY</span><strong>Har safar,<br/>aapke saath.</strong><small>Simple booking · Transparent fare · Local support</small></div>
+      <div className="photo-caption"><span>YOUR JOURNEY, OUR PRIORITY</span><strong>Har safar,<br/>aapke saath.</strong><small>Comfortable MPV · Family trips · Outstation rides</small></div>
       <div className="hero-float-card"><span className="hero-float-icon">✓</span><div><strong>Easy booking</strong><small>Request first. Confirm after fare approval.</small></div></div>
     </div>
   </section>;
